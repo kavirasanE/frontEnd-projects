@@ -33,3 +33,167 @@
     })
 </script>
 </html>
+import React from "react";
+import { useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import Person4Icon from "@mui/icons-material/Person4";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import { Link } from "react-router-dom";
+import Button from "../layouts/Button";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import CloseIcon from "@mui/icons-material/Close";
+import { useCart } from "./Cart";
+
+const Navbar = () => {
+  const [menu, setMenu] = useState(false);
+  const items = useCart();
+
+  const handleChange = () => {
+    setMenu(!menu);
+  };
+  const closeMenu = () => {
+    setMenu(false);
+  };
+
+  return (
+    <div className=" w-full z-10">
+      <div>
+        <div className=" flex flex-row justify-between p-5 lg:px-32 px-5 bg-gradient-to-r from-slate-100 to-slate-300">
+          <div className="flex flex-row items-center cursor-pointer gap-2">
+            <span>img</span>
+            <h1 className=" text-xl font-semibold">Kavirasan</h1>
+          </div>
+          <Link
+            to="/"
+            duration={500}
+            className="group relative inline-block cursor-pointer hover:text-white"
+          >
+            <div>
+              <ShoppingBagIcon />
+              <span className="absolute bg-blue-800 p-0.4 text-white  text-center right-[1px] top-5 rounded-full w-5 h-5 ">
+                {items && items.length ? items.length : 0}
+              </span>
+            </div>
+
+            <span className="absolute inset-x-1 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transtion-transform group-hover:scale-x-100 duration-450 "></span>
+          </Link>
+          <nav className="hidden md:flex flex-row items-center text-lg font-medium gap-8">
+            <Link
+              to="/"
+              duration={500}
+              className="group relative inline-block cursor-pointer hover:text-white"
+            >
+              Home
+              <span className="absolute inset-x-1 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transtion-transform group-hover:scale-x-100 duration-450 "></span>
+            </Link>
+            <Link
+              to="/About"
+              duration={500}
+              className="group relative inline-block cursor-pointer hover:text-white"
+            >
+              About Us
+              <span className="absolute inset-x-1 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transtion-transform group-hover:scale-x-100 duration-450 "></span>
+            </Link>
+
+            <Link
+              to="/products/:id"
+              duration={500}
+              className="group relative inline-block cursor-pointer hover:text-white"
+            >
+              Products
+              <span className="absolute inset-x-1 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transtion-transform group-hover:scale-x-100 duration-450 "></span>
+            </Link>
+
+            <Link
+              to="/"
+              duration={500}
+              className="group relative inline-block cursor-pointer hover:text-white"
+            >
+              Reviews
+              <span className="absolute inset-x-1 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transtion-transform group-hover:scale-x-100 duration-450 "></span>
+            </Link>
+
+            <Link
+              to="/"
+              duration={500}
+              className="group relative inline-block cursor-pointer hover:text-white"
+            >
+              <ShoppingBagIcon />,
+              <span className="absolute inset-x-1 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transtion-transform group-hover:scale-x-100 duration-450 "></span>
+            </Link>
+          </nav>
+          <div className="hidden md:flex">
+            <Button title="Login"></Button>
+          </div>
+          <div className="md:hidden flex items-center cursor-pointer ">
+            {menu ? (
+              <CloseIcon onClick={handleChange} />
+            ) : (
+              <MenuOpenIcon onClick={handleChange} />
+            )}
+          </div>
+        </div>
+        <div
+          className={`${
+            menu
+              ? "translate-x-0 duration-500"
+              : "translate-x-full duration-500"
+          } lg:hidden flex flex-col absolute bg-black text-white w-screen  items-center left-0 font-semibold top-16 pt-8 pb-4 gap-8 h-fit transition-transform duration:300`}
+        >
+          <Link
+            to="/"
+            duration={500}
+            className="group relative inline-block cursor-pointer hover:text-orange-900"
+            onClick={closeMenu}
+          >
+            Home
+            <span className="absolute inset-x-0 bottom-0 h-0.5 bg-white transform scale-x-0 origin-left transtion-transform group-hover:scale-x-100 duration-450 "></span>
+          </Link>
+          <Link
+            to="/About"
+            duration={500}
+            className="group relative inline-block cursor-pointer hover:text-white"
+            onClick={closeMenu}
+          >
+            About Us
+            <span className="absolute inset-x-1 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transtion-transform group-hover:scale-x-100 duration-450 "></span>
+          </Link>
+
+          <Link
+            to="/products/:id"
+            duration={500}
+            className="group relative inline-block cursor-pointer hover:text-white"
+            onClick={closeMenu}
+          >
+            Products
+            <span className="absolute inset-x-1 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transtion-transform group-hover:scale-x-100 duration-450 "></span>
+          </Link>
+
+          <Link
+            to="/"
+            duration={500}
+            className="group relative inline-block cursor-pointer hover:text-white"
+            onClick={closeMenu}
+          >
+            Reviews
+            <span className="absolute inset-x-1 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transtion-transform group-hover:scale-x-100 duration-450 "></span>
+          </Link>
+
+          <Link
+            to="/"
+            duration={500}
+            className="group relative inline-block cursor-pointer hover:text-white"
+            onClick={closeMenu}
+          >
+            <ShoppingBagIcon />
+            <span className="absolute inset-x-1 bottom-0 h-0.5 bg-black transform scale-x-0 origin-left transtion-transform group-hover:scale-x-100 duration-450 "></span>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;
+
